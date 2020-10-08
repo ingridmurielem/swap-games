@@ -1,42 +1,50 @@
-import React, {useState} from 'react';
-import {Container, Input, Button, Title} from './styles'
+import React from "react";
+import {Container, Input, Title} from './styles'
 import Botao from '@material-ui/core/Button';
-import firebase from '/Users/ingridmurielem/Projetos/FACULDADE/swap-routes/swap-routes/src/Data/Firabase.js';
 
-export default function Login() {
-  
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
-    const emailCadastrado = 'maria@gmail.com'
-    const password = '12345678'
-  
-    const login = () => {
-      firebase.auth().signInWithEmailAndPassword(email, pass).then(user => {
-        if (setEmail === emailCadastrado  && setPass === password) {
-            function Oi() {
-                return (
-                  <div >
-                      <Button> oi </Button>
-                  </div>
-                
-                );
-            }   
-        }
-    })
+class Login {
+    constructor(props) {
+      super(props);
+      this.state = {
+        email: '',
+        pass: ''
+      };
     }
+
+    handleSubmit = ( event ) => { 
+      event.preventDefault (); 
+      const {email, pass} = this.state 
+      alert (`Seus valores de estado:  n 
+      email: $ {email}  n 
+      pass: $ {pass} `) 
+    }
+    handleEmailChange = event => {
+      this.setState({ email: event.target.value });
+    };
   
+    handlePassChange = event => {
+      this.setState({ pass: event.target.value });
+    };
+   
+    render() {
     return (
-     <Container> 
+     <Container > 
        <Title>Swap Games </Title>
+       <form onSubmit = {this.handleSubmit}> 
         <Input type="email" placeholder="Informe seu email"
-        value={email} onChange={e=> setEmail(e.target.value)}
+        value={this.state.email}
+        onChange={this.handleEmailChange}
         />
         <Input type="password"
         minlength="8" placeholder="Informe sua senha"
-        value={pass} onChange={e=> setEmail(e.target.value)}
+        value={this.state.pass}
+        onChange={this.handlePassChange}
         />
-        <Button onClick={login}> Entrar com e-mail agora </Button>
+        <button type = "submit" className = "btn btn-sucesso btn-block"> Enviar </ button> 
         <Botao href="/cadastro" variant= "contained" color="secondary"> Cadastre com e-mail agora </Botao>
+        </form>
      </Container>   
     );
   }
+}
+export default Login;
