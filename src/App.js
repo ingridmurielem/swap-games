@@ -1,13 +1,14 @@
 import React from 'react';
-import PagLogin from "./Login/Login.js";
 import './App.css';
+import PagHeader from "./components/PagHeader.js"
+import Login from "./Login/Login.js"
 
 function App() {
   return (
-    <div >
-        <PagLogin/>
-    </div>
-  
+    <div > 
+      <Login/>
+  </div>
+
   );
 }
 
