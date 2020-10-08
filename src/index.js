@@ -11,6 +11,7 @@ ReactDOM.render(
         <Switch>
             <Route path="/" exact={true} component={App} />
             <Route path="/cadastro" component={CadastraPessoa} />
+           {/* Aqui adicionamos novas rotas, novas paginas como Forum */}
         </Switch>
     </ BrowserRouter>
     , document.getElementById('root'));

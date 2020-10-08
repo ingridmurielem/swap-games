@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import {Container, Input, Title} from './styles'
 import Botao from '@material-ui/core/Button';
 import './UserForm.css'
 
@@ -16,40 +16,29 @@ class Form extends React.Component {
   handleEmailChange = event => {
     this.setState({ email: event.target.value });
   };
-  handleTelefoneChange = event => {
+  handlePassChange = event => {
     this.setState({ pass: event.target.value });
   };
 
 
   render() {
     return (
-    <div className = 'UserForm'>
-    <div className = 'AppColor' >
-        Email:
-        <input
-          data-testid="input-email"
-          type="text"
-          value={this.state.email}
-          onChange={this.handleEmail}
-        />
-       Pass:
-        <input
-          data-testid="input-telefone"
-          type="password"
-          value={this.state.pass}
-          onChange={this.handlepass}
-        />
-       
-        <Botao variant="contained" color="primary"
-          text="Adicionar"
+    <Container> 
+    <Title>Swap Games </Title>
+     <Input type="email" placeholder="Informe seu email"
+     value={this.state.email} onChange={this.handleEmailChange}
+     />
+     <Input type="password"
+        minlength="8" placeholder="Informe sua senha"
+     value={this.state.pass} onChange={this.handlePassChange}
+     />
+    <Botao variant="contained" color="secondary" href="/"
           onClick={() => {
             this.props.onClick(this.state.email, this.state.pass);
           }}
-          href ="/"
         > Adicionar </Botao>
-      </div>
-    </div> 
-    );
-  }
+    </Container>  
+  );
+}
 }
 export default Form;

@@ -24,15 +24,6 @@ export default function Login() {
         }
     })
     }
-    
-    const cadastro = () => {
-      firebase.auth().createUserWithEmailAndPassword(email, pass).then(user => {
-       return (
-        <Button> oi </Button>
-       );
-      })
-    }
-  
   
     return (
      <Container> 
@@ -40,9 +31,9 @@ export default function Login() {
         <Input type="email" placeholder="Informe seu email"
         value={email} onChange={e=> setEmail(e.target.value)}
         />
-        <Input type="password" id="pass" name="password"
-           minlength="8" requiredplaceholder="Informe sua senha"
-        value={pass} onChange={e=> setPass(e.target.value)}
+        <Input type="password"
+        minlength="8" placeholder="Informe sua senha"
+        value={pass} onChange={e=> setEmail(e.target.value)}
         />
         <Button onClick={login}> Entrar com e-mail agora </Button>
         <Botao href="/cadastro" variant= "contained" color="secondary"> Cadastre com e-mail agora </Botao>

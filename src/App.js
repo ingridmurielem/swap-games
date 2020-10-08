@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-import PagHeader from "./components/PagHeader.js"
-import Login from "./Login/Login.js"
+import Login from "./components/Login.js"
 
 function App() {
   return (
