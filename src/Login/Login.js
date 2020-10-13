@@ -1,37 +1,32 @@
 import React, {useState} from 'react';
 import {Container, Input, Button, Title} from './styles'
-import firebase from '/Users/ingridmurielem/Projetos/FACULDADE/swap-routes/swap-routes/src/Data/Firabase.js';
+import FirebaseAuthAdapter from '../Data/FirebaseAuthAdapter'
 
-export default function Login() {
+function LoginView({email, pass, setEmail, setPass ,signInAction, signUpAction}) {
+  return (
+    <Container> 
+      <Title>Swap Games </Title>
+       <Input type="email" placeholder="Informe seu email"
+       value={email} onChange={e=> setEmail(e.target.value)}
+       />
+       <Input type="password" placeholder="Informe sua senha"
+       value={pass} onChange={e=> setPass(e.target.value)}
+       />
+       <Button onClick={signInAction}> Entrar com e-mail agora </Button>
+       <Button primary onClick={signUpAction}> Cadastre com e-mail agora </Button>
+    </Container>   
+   );
+}
+
+
+export default function LoginController() {
   
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     
-  
-    const login = () => {
-      firebase.auth().signInWithEmailAndPassword(email, pass).then(user => {
-        console.log(user)
-          })
-    }
-    
-    const cadastro = () => {
-      firebase.auth().createUserWithEmailAndPassword(email, pass).then(user => {
-        console.log(user)
-      })
-    }
-  
-  
-    return (
-     <Container> 
-       <Title>Swap Games </Title>
-        <Input type="email" placeholder="Informe seu email"
-        value={email} onChange={e=> setEmail(e.target.value)}
-        />
-        <Input type="password" placeholder="Informe sua senha"
-        value={pass} onChange={e=> setPass(e.target.value)}
-        />
-        <Button onClick={login}> Entrar com e-mail agora </Button>
-        <Button primary onClick={cadastro}> Cadastre com e-mail agora </Button>
-     </Container>   
-    );
+    const firAuthAdapter = new FirebaseAuthAdapter();
+    const signInAction = () => firAuthAdapter.signIn(email, pass);
+    const signUpAction = () => firAuthAdapter.signUp(email, pass);
+
+    return LoginView(email, pass, setEmail.bind(this), setPass.bind(this), signInAction, signUpAction);
   }
