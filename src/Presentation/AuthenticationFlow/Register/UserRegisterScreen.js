@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Container, Input, Button, Title} from '../../../CommonStyles/styles'
-import FirebaseAuthAdapter from '../../../Data/FirebaseAuthAdapter'
+import FirebaseAuthAdapter from '../../../Adapters/FirebaseAuthAdapter'
 
 function RegisterView(signUpAction) {
 
@@ -10,8 +10,7 @@ function RegisterView(signUpAction) {
 
   return (
     <Container> 
-      <Title>Swap Games </Title>
-      <Title>{email} {pass}</Title>
+      <Title>Swap Games Register</Title>
       <Input type="name" placeholder="Informe seu nome"
        value={userName} onChange={e=> setUserName(e.target.value)}
        />
