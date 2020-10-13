@@ -1,14 +1,15 @@
 import firebase from 'firebase'
 
 const config = {
-    apiKey: "AIzaSyBRgLVqEkrKdhjr3CkqGpcEt-4hRfLTW4w",
-    authDomain: "tips-cca39.firebaseapp.com",
-    databaseURL: "https://tips-cca39.firebaseio.com",
-    projectId: "tips-cca39",
-    storageBucket: "tips-cca39.appspot.com",
-    messagingSenderId: "940314534258",
-    appId: "1:940314534258:web:47646287f0ae8c9b7f3deb",
-    measurementId: "G-T49ZX6YQQN"
+    apiKey: "AIzaSyDaelLOrKqAxuqRDccWuniPpRILndY7fAY",
+    authDomain: "swap-games.firebaseapp.com",
+    databaseURL: "https://swap-games.firebaseio.com",
+    projectId: "swap-games",
+    storageBucket: "swap-games.appspot.com",
+    messagingSenderId: "667763601801",
+    appId: "1:667763601801:web:270f5a802fda0f5ade3158",
+    measurementId: "G-DV8MP026S7"
+    
 };
 firebase.initializeApp(config);
 export default firebase;
