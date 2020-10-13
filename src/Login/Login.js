@@ -24,6 +24,17 @@ function LoginView(signInAction) {
 
 export default function LoginController() {
     const firAuthAdapter = new FirebaseAuthAdapter();
-    const signInAction = (email, pass) => firAuthAdapter.signIn(email, pass);      
+
+    const signUpSuccess = (user) => {
+      console.log(user);
+      // update UI
+    }
+
+    const signInError = (error) => {
+      console.log(error);
+      // update UI
+    }
+
+    const signInAction = (email, pass) => firAuthAdapter.signIn(email, pass, signUpSuccess).catch(error => signInError(error));      
     return LoginView(signInAction);
 }
