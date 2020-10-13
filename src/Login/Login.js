@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {Container, Input, Button, Title} from './styles'
 import FirebaseAuthAdapter from '../Data/FirebaseAuthAdapter'
 
-function LoginView({initialEmail, initialPass, signInAction, signUpAction}) {
+function LoginView(signInAction, signUpAction) {
 
-  let [email, setEmail] = React.useState(initialEmail);
-  let [pass, setPass] = React.useState(initialPass);
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
 
   return (
     <Container> 
@@ -17,8 +17,8 @@ function LoginView({initialEmail, initialPass, signInAction, signUpAction}) {
        <Input type="password" placeholder="Informe sua senha"
        value={pass} onChange={e=> setPass(e.target.value)}
        />
-       <Button onClick={signInAction}> Entrar com e-mail agora </Button>
-       <Button primary onClick={signUpAction}> Cadastre com e-mail agora </Button>
+       <Button onClick={() => signInAction(email, pass)}> Entrar com e-mail agora </Button>
+       <Button primary onClick={() => signUpAction(email, pass)}> Cadastre com e-mail agora </Button>
     </Container>   
    );
 }
@@ -26,20 +26,17 @@ function LoginView({initialEmail, initialPass, signInAction, signUpAction}) {
 
 export default function LoginController() {
 
-    let email = '';
-    let pass = '';
-    
     const firAuthAdapter = new FirebaseAuthAdapter();
-    const signInAction = () => {
-      email = 'ENTROUUU AQUI - SIGN in'
+
+    const signInAction = (email, pass) => {
       console.log(email, pass);
+      firAuthAdapter.signIn(email, pass);
       
     }
-    const signUpAction = () => {
-      email = 'ENTROUUU AQUI - SIGN up'
+    const signUpAction = (email, pass) => {
       console.log(email, pass);
       firAuthAdapter.signUp(email, pass);
     }
 
-    return LoginView(email, pass, () => signInAction, () => signUpAction);
+    return LoginView(signInAction, signUpAction);
   }
