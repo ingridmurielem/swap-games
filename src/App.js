@@ -1,13 +1,12 @@
 import React from 'react';
+import PagRegister from './Presentation/AuthenticationFlow/Register/UserRegisterScreen'
 import './App.css';
-import Login from "./components/Login.js"
 
 function App() {
   return (
-    <div > 
-      <Login/>
-  </div>
-
+    <div >
+        <PagRegister/>
+    </div>  
   );
 }
 
