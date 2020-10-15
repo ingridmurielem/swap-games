@@ -1,12 +1,12 @@
 import React from 'react';
 import PagRegister from './Presentation/AuthenticationFlow/Register/UserRegisterScreen'
-import SideBar from './Presentation/HomeFlow/HomeSideBar'
+import HomeScreen from './Presentation/HomeFlow/HomeScreen'
 import './App.css';
 
 function App() {
   return (
     <div >
-        <SideBar/>
+        <HomeScreen/>
     </div>  
   );
 }

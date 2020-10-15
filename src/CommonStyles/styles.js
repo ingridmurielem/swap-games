@@ -1,11 +1,45 @@
   import styled from "styled-components";
   import HomeItem from "../images/home_menu_item.png"
 
+  export const SideBarContainer =  styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+`;
+
+
+
+export const GameTitle = styled.text`
+    font-weight: bold;
+    color: #000000;
+    font-size: 25px;
+ `;
+
+ export const GameSubtitle = styled.text`
+    font-weight: medium;
+    color: #000000;
+    font-size: 20px;
+ `;
+
+
+ export const HorizontalStack = styled.div`
+ display: flex;
+ align-items: flex-start;
+ flex-direction: row;
+`;
+
+export const VerticalStack = styled.div`
+display: flex;
+align-items: flex-start;
+flex-direction: column;
+`;
+
 export const Container =  styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
 `;
 
 export const Input = styled.input`

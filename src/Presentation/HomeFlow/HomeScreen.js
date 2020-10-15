@@ -1,23 +1,27 @@
 import React, {useState} from 'react';
-import {Container, Title} from '../CommonStyles/styles'
+import {GameSubtitle, GameTitle, HorizontalStack, VerticalStack} from '../../CommonStyles/styles'
 import FirebaseDataAdapter from '../../Adapters/FirebaseDataAdapter'
+import HomeSideBar from './HomeSideBar'
 
 function HomeView() {
 
   return (
-    <Container> 
-      <Title>Home screen</Title>
-    </Container>   
+    <>
+      <HorizontalStack>
+        <HomeSideBar homeAreaClick={() => {}} userAreaClick={() => {}} chatsAreaClick={() => {}} dealsAreaClick={() => {}}/>
+        <VerticalStack style={{marginTop: "15px"}}>
+          <GameTitle>Swap game</GameTitle>
+          <GameSubtitle>Trades and chats</GameSubtitle>
+        </VerticalStack>
+      </HorizontalStack>
+    </>   
    );
 }
 
-export default async function HomeController() {
-  
-  const itemsList = await FirebaseDataAdapter.getItemsList(); 
-  const chatsList = await FirebaseDataAdapter.getChatsList();
-  const userList = await FirebaseDataAdapter.getUserList();
+export default function HomeController() {
 
-  // filter logic
+
+
 
   return HomeView();
 }
