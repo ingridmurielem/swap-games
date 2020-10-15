@@ -3,23 +3,31 @@
 
   export const SideBarContainer =  styled.div`
   display: flex;
+  margin-left: 25px;
+  margin-top: 25px;
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
 `;
 
 
+export const SearchListHeader = styled.text`
+    font-weight: regular;
+    color: #000000;
+    font-size: 15px;
+    margin-top: 5px;
+`;
 
 export const GameTitle = styled.text`
     font-weight: bold;
     color: #000000;
-    font-size: 25px;
+    font-size: 35px;
  `;
 
  export const GameSubtitle = styled.text`
     font-weight: medium;
     color: #000000;
-    font-size: 20px;
+    font-size: 25px;
  `;
 
 
