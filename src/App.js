@@ -1,11 +1,11 @@
 import React from 'react';
-import PagRegister from './Presentation/AuthenticationFlow/Register/UserRegisterScreen'
+import HomeView from './Presentation/HomeFlow/HomeScreen.js';
 import './App.css';
 
 function App() {
   return (
     <div >
-        <PagRegister/>
+        <HomeView/>
     </div>  
   );
 }
