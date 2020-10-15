@@ -10,7 +10,7 @@ function RegisterView(signUpAction) {
 
   return (
     <Container> 
-      <Title>Swap Games Register</Title>
+      <Title>Login</Title>
       <Input type="name" placeholder="Informe seu nome"
        value={userName} onChange={e=> setUserName(e.target.value)}
        />
@@ -38,7 +38,9 @@ export default function RegisterController() {
       // update UI
     }
 
-    const signUpAction = (email, pass, userName) => firAuthAdapter.signUp(email, pass, userName, signUpSuccess).catch(error => signUpError(error));  
+    const signUpAction = (email, pass, userName) => {
+       firAuthAdapter.signUp(email, pass, userName, signUpSuccess).catch(error => signUpError(error));  
+    }
     
     return RegisterView(signUpAction);  
 }

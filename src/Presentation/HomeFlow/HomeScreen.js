@@ -3,6 +3,9 @@ import {GameSubtitle, GameTitle, HorizontalStack, VerticalStack, SearchListHeade
 import MenuItems from './MenuItem'
 import HomeSideBar from './HomeSideBar'
 import Filters from './Filters'
+import SourceFlow from './SourceFlow'
+
+
 
 const logoImg = require("../../images/icon.png");
 
@@ -13,7 +16,10 @@ function HomeView(menuItemClicked) {
   return (
     <>
       <VerticalStack>
+        <HorizontalStack>
         <img src={logoImg} style={{marginLeft: "25px", marginTop: "25px"}}/>
+        <SourceFlow style = {{marginLeft: "25px"}} />
+        </HorizontalStack>
         <HorizontalStack>
           <HomeSideBar menuItemClicked={menuItemClicked} />
           <VerticalStack style={{marginTop: "35px", marginLeft: "35px"}}>
