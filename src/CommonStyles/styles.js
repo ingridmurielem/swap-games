@@ -1,11 +1,53 @@
   import styled from "styled-components";
+  import HomeItem from "../images/home_menu_item.png"
 
+  export const SideBarContainer =  styled.div`
+  display: flex;
+  margin-left: 25px;
+  margin-top: 25px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+`;
+
+
+export const SearchListHeader = styled.text`
+    font-weight: regular;
+    color: #000000;
+    font-size: 15px;
+    margin-top: 5px;
+`;
+
+export const GameTitle = styled.text`
+    font-weight: bold;
+    color: #000000;
+    font-size: 35px;
+ `;
+
+ export const GameSubtitle = styled.text`
+    font-weight: medium;
+    color: #000000;
+    font-size: 25px;
+ `;
+
+
+ export const HorizontalStack = styled.div`
+ display: flex;
+ align-items: flex-start;
+ flex-direction: row;
+`;
+
+export const VerticalStack = styled.div`
+display: flex;
+align-items: flex-start;
+flex-direction: column;
+`;
 
 export const Container =  styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
 `;
 
 export const Input = styled.input`
@@ -17,6 +59,16 @@ export const Input = styled.input`
     border-radius: 3px;
     margin: 5px;
 `;
+
+export const HomeButton = styled.button`
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-image: url(${HomeItem}); 
+    margin: 10px;
+    font-weight: bold;
+`; 
+
 
 export const Button = styled.button`
     padding: 10px;

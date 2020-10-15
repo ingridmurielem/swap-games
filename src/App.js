@@ -1,11 +1,12 @@
 import React from 'react';
-import HomeView from './Presentation/HomeFlow/HomeScreen.js';
+import HomeScreen from './Presentation/HomeFlow/HomeScreen'
+
 import './App.css';
 
 function App() {
   return (
     <div >
-        <HomeView/>
+        <HomeScreen/>
     </div>  
   );
 }

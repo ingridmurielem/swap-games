@@ -5,7 +5,7 @@ import { Autocomplete } from '@material-ui/lab';
 
 export default function SourceFlow() {
   return (
-    <div style={{ width: 300 }}>
+    <div style={{ width: 300, alignSelf: "center", marginLeft: 150}}>
       <Autocomplete
         freeSolo
         id="list"
