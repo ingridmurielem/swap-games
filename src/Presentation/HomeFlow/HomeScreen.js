@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
-import {Container, Title} from '../CommonStyles/styles'
+import React from 'react';
+import {Container, Title} from './styles'
+import SourceFlow from './SourceFlow'
 import FirebaseDataAdapter from '../../Adapters/FirebaseDataAdapter'
 
 function HomeView() {
@@ -7,17 +8,12 @@ function HomeView() {
   return (
     <Container> 
       <Title>Home screen</Title>
+      <SourceFlow></SourceFlow>
+     
     </Container>   
    );
 }
 
-export default async function HomeController() {
-  
-  const itemsList = await FirebaseDataAdapter.getItemsList(); 
-  const chatsList = await FirebaseDataAdapter.getChatsList();
-  const userList = await FirebaseDataAdapter.getUserList();
-
-  // filter logic
-
+export default function HomeController() { 
   return HomeView();
 }
