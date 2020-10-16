@@ -1,7 +1,8 @@
 import User from "./User"
 import Item from "./Item"
+import Filter from './Filters'
 
-class RegistredUser {
+export default class RegistredUser {
     constructor(id, name, email, password, city, tags) {
         this.id = id;
         this.name = name;
@@ -9,8 +10,8 @@ class RegistredUser {
         this.password = password;
         this.city = city;  
         this.tags = tags;
-        this.items = new Array();
-        this.trades = new Array();
+        //this.items = new Array();
+        //this.trades = new Array();
     }
     
     /**
@@ -33,7 +34,7 @@ class RegistredUser {
      * @param {array} images 
      */
     add_item(name, description, images) {
-        new_item = new Item(name, description, images)
+        const new_item = new Item(name, description, images)
         this.items.push(new_item)
     }
 
@@ -53,4 +54,11 @@ class RegistredUser {
         return {Name: this.name, Email: this.email, Password: this.password, City: this.city,
                 Tags: this.tags, Item: this.items, Trades: this.trades}
     } 
+
+    toListItem() {
+        return {
+          name: this.name,
+          type: Filter.USERS
+        }
+      }
 }

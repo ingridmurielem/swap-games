@@ -10,6 +10,12 @@
   flex-direction: column;
 `;
 
+export const FilterTitle = styled.text`
+    font-weight: regular;
+    color: #000000;
+    margin-top: 10px;
+    font-size: 15px;
+ `;
 
 export const SearchListHeader = styled.text`
     font-weight: regular;
