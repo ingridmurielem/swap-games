@@ -3,14 +3,15 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Autocomplete } from '@material-ui/lab';
 
-export default function SourceFlow() {
+export default function SourceFlow(props) {
   return (
-    <div style={{ width: 300, alignSelf: "center", marginLeft: 150}}>
+    <div style={{ width: 600, alignSelf: "center", marginLeft: 50, marginTop: 25}}>
       <Autocomplete
         freeSolo
         id="list"
         disableClearable
-        options={top100Games.map((option) => option.title)}
+        onChange={(changeEvent, value) => {props.searchedTextValueDidChange(value)}}
+        options={props.dataSource.map((item) => item.name)}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -24,22 +25,3 @@ export default function SourceFlow() {
     </div>
   );
 }
-
-const top100Games = [
-  { title: 'The Shawshank Redemption', type: 'chat' },
-  { title: 'The Godfather', type: 'chat' },
-  { title: 'The Godfather: Part II', type: 'chat' },
-  { title: 'The Dark Knight', type: 'chat' },
-  { title: '12 Angry Men', type: 'chat' },
-  { title: "Schindler's List",type: 'chat' },
-  { title: 'Pulp Fiction', type: 'chat' },
-  { title: 'The Lord of the Rings: The Return of the King', type: 'chat' },
-  { title: 'The Good, the Bad and the Ugly', type: 'chat' },
-  { title: 'Fight Club', type: 'game' },
-  { title: 'The Lord of the Rings: The Fellowship of the Ring', type: 'game' },
-  { title: 'Star Wars: Episode V - The Empire Strikes Back', type: 'game' },
-  { title: 'Forrest Gump', type: 'game' },
-  { title: 'Inception', type: 'game' },
-  { title: 'The Lord of the Rings: The Two Towers', type: 'game' },
-  { title: "One Flew Over the Cuckoo's Nest", type: 'game' },
-];
