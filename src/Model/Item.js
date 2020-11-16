@@ -7,6 +7,8 @@ export default class Item {
     this.description = description;
     this.images = images;
     this.category = category;
+
+    
     this.removeItem = this.removeItem.bind(this);
   }
 

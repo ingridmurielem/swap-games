@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import CadastraPessoa from './CadastraPessoa';
 import PagHeader from './components/PagHeader';
+import Profile from './Presentation/UserFlow/ProfileScreen'
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
@@ -12,7 +13,7 @@ ReactDOM.render(
         <Switch>
             <Route path="/" exact={true} component={App} />
             <Route path="/cadastro" component={CadastraPessoa} />
-            <Route path="/pagHeader" component={PagHeader} />
+            <Route path="/Profile" component={Profile} />
            {/* Aqui adicionamos novas rotas, novas paginas como Forum */}
         </Switch>
     </ BrowserRouter>
