@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {SideBarContainer} from '../../CommonStyles/styles'
+import {SideBarContainer,Button} from '../../CommonStyles/styles'
 import MenuItems from './MenuItem'
 
 const home_background = require('../../images/home_menu_item.png');
@@ -13,7 +13,7 @@ export default function SideBarView(props) {
    
    <SideBarContainer> 
     <img src={home_background} onClick={() => props.menuItemClicked(MenuItems.home)}/>
-    <img src={user_background} onClick={() => props.menuItemClicked(MenuItems.profile)}/>
+    <a href="/cadastro"> <button> < img src={user_background} /> </button></a>
     <img src={chats_background} onClick={() => props.menuItemClicked(MenuItems.chats)}/>
     <img src={deals_background} onClick={() => props.menuItemClicked(MenuItems.deals)}/>
 
