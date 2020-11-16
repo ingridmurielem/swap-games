@@ -7,6 +7,9 @@ export default class Item {
     this.description = description;
     this.images = images;
     this.category = category;
+
+    
+    this.removeItem = this.removeItem.bind(this);
   }
 
   add_image(filepath) {
@@ -15,6 +18,12 @@ export default class Item {
 
   remove_image(index) {
     this.images.splice(index, 1);
+  }
+  removeItem = (removeItem,type) => {
+      this.setState({
+        ...this.state,
+        item: this.state.item.filter(item => item !== removeItem)
+    });
   }
 
   to_json() {
