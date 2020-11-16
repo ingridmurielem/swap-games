@@ -37,6 +37,12 @@ export const GameTitle = styled.text`
  `;
 
 
+ export const DealsListItemText = styled.text`
+ font-weight: medium;
+ color: #000000;
+ font-size: 25px;
+`;
+
  export const HorizontalStack = styled.div`
  display: flex;
  align-items: flex-start;
@@ -93,3 +99,40 @@ export const Title = styled.p`
     color: #9b59b6;
     font-size: 22px;
     `;
+
+
+export const AcceptDealButton = styled.button `
+    padding: 10px;
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+    background: "#09B141"
+    color: #fff;
+    margin: 10px;
+    font-weight: bold;
+`;
+
+export const DeclineDealButton = styled.button `
+padding: 10px;
+width: 200px;
+height: 50px;
+border: none;
+border-radius: 8px;
+background: "#E8505B"
+color: #fff;
+margin: 10px;
+font-weight: bold;
+`;
+
+export const TalkThroughWhatsappButton = styled.button `
+padding: 10px;
+width: 200px;
+height: 50px;
+border: none;
+border-radius: 8px;
+background: "#B79B0C"
+color: #fff;
+margin: 10px;
+font-weight: bold;
+`;

@@ -8,6 +8,7 @@ import ResourceList from './ResourceList'
 
 import FirDataAdaper from '../../Adapters/FirebaseDataAdapter'
 import { Radio } from '@material-ui/core';
+import FirebaseAuthAdapter from '../../Adapters/FirebaseAuthAdapter';
 
 const logoImg = require("../../images/icon.png");
 

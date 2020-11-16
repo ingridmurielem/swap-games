@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Container, Input, Button, Title} from '../CommonStyles/styles'
+import {Container, Input, Button, Title} from '../../../CommonStyles/styles'
 import FirebaseAuthAdapter from '../../../Adapters/FirebaseAuthAdapter'
 
 function LoginView(signInAction) {
