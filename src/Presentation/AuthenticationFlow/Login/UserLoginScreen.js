@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Container, Input, Button, Title} from '../../../CommonStyles/styles'
 import FirebaseAuthAdapter from '../../../Adapters/FirebaseAuthAdapter'
 
+import { useHistory } from "react-router-dom";
+
 function LoginView(signInAction) {
 
   const [email, setEmail] = useState('');
@@ -24,10 +26,11 @@ function LoginView(signInAction) {
 
 export default function LoginController() {
     
+   const history = useHistory();
 
     const signUpSuccess = (user) => {
       console.log(user);
-      // update UI
+      history.push("/homeScreen");
     }
 
     const signInError = (error) => {

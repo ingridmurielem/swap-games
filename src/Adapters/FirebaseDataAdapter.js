@@ -10,6 +10,7 @@ import transitions from '@material-ui/core/styles/transitions';
 import TransactionStatus from '../Model/Transaction/TransactionStatus'
 
 import { v4 as uuidv4 } from 'uuid';
+import { useState } from 'react';
 
 /// Fazer uma logicazinha do lado servidor utilizando Cloud functions disponibilizadas pelo firebase tbm
 
@@ -19,10 +20,14 @@ class FirebaseDataAdapter {
     getAllItems = async (callback) => {
         
         var finalItems = [];
-        var itemObjects = [];
+        var itemObjects = {};
 
         await firebase.database().ref("items").once('value', snapshot => {
-            itemObjects = snapshot.val();
+            if(snapshot.val() != undefined && snapshot.val() != null)  {
+                itemObjects = snapshot.val();
+            } else {
+                return
+            }
         });
 
         Object.keys(itemObjects).forEach(itemID => {
@@ -49,12 +54,56 @@ class FirebaseDataAdapter {
         ]
     }
 
+    removeItemFromFirebase = async(itemID, onComplete) => {
+
+        firebase.auth().onAuthStateChanged((user)=>{
+            
+            firebase.database().ref("items").child(itemID).remove();
+    
+            firebase
+             .database()
+             .ref("users")
+             .child(user.uid)
+             .child("items")
+             .child(itemID)
+             .remove(onComplete);
+         
+         });
+
+        
+    }
+
+    saveItemForCurrentUser = async(item, onComplete) => {
+        
+        firebase.auth().onAuthStateChanged((user)=>{
+            
+           const uuid = uuidv4();
+
+           item.ownerID = user.uid;
+           
+         firebase
+            .database()
+            .ref("items")
+            .child(uuid)
+            .set(item.toJson(), onComplete);
+
+         firebase
+            .database()
+            .ref("users")
+            .child(user.uid)
+            .child("items")
+            .child(uuid)
+            .set(uuid);
+        
+        });
+    }
+
     getCurrentUserItemsIDs = async(callback) => {
 
         firebase.auth().onAuthStateChanged((user)=>{
             firebase.database().ref("users").child(user.uid).child("items").once('value', function (snapshot) {
                 const ids = snapshot.val();
-                if(ids === undefined) {
+                if(ids == undefined || ids == null) {
                     callback([]);
                 } else {
                     callback(Object.keys(ids).map(key => key));
@@ -129,12 +178,29 @@ class FirebaseDataAdapter {
         callback(finalTransactions);
     }
 
-    setTransactionStatus = (transactionID, transactionStatus) => {
+    setTransactionStatus = (transaction, transactionStatus) => {
         firebase.database()
             .ref("transactions")
-            .child(transactionID)
+            .child(transaction.id)
             .child("status")
             .set(transactionStatus);
+
+        if (transactionStatus == TransactionStatus.DONE) {
+           
+            firebase.database()
+            .ref("items")
+            .child(transaction.itemID)
+            .child("sold")
+            .set(true);
+
+            transaction.tradeOff.forEach( itemID => {
+                firebase.database()
+                .ref("items")
+                .child(itemID)
+                .child("sold") 
+                .set(true);
+            });
+        }
     }
 
     startTransaction = async (transaction, onComplete) => {

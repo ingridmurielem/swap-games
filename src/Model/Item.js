@@ -11,12 +11,14 @@ export default class Item {
     this.sold = sold;
   }
 
+  
   static fromJson = (id, json) => {
     return new Item(id, json.name, json.description, [], json.category, json.ownerID, json.sold);
   }
 
   static emptyItem = () => {
     return new Item("", "", "", [], "", "", false);
+
   }
 
   add_image(filepath) {
@@ -26,7 +28,14 @@ export default class Item {
   remove_image(index) {
     this.images.splice(index, 1);
   }
-
+  /*
+  removeItem = (removeItem,type) => {
+      this.setState({
+        ...this.state,
+        item: this.state.item.filter(item => item !== removeItem)
+    });
+  }
+*/
   toJson() {
     return {name: this.name, description: this.description, category: this.category, ownerID: this.ownerID, sold: this.sold }
   }

@@ -108,7 +108,10 @@ export default function HomeController() {
 
   useEffect(() => { 
     FirDataAdaper.getAllItems(function(items) {
-      setAllItems(items);
+
+      const filteredItems = items.filter(item => { return !item.sold});
+
+      setAllItems(filteredItems);
     });
   
     }, []);

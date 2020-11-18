@@ -73,7 +73,7 @@ export default function DealsListItem(props) {
     }
 
     const changeTransactionStatus = (transactionStatus) => {
-        FirDataAdapter.setTransactionStatus(props.transaction.id, transactionStatus);
+        FirDataAdapter.setTransactionStatus(props.transaction, transactionStatus);
         setTransactionStatus(transactionStatus);
     }
 
