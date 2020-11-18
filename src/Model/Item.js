@@ -1,21 +1,22 @@
 import Filter from './Filters'
 
 export default class Item {
-  constructor(id, name, description, images, category, ownerID) {
+  constructor(id, name, description, images, category, ownerID, sold) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.images = images;
     this.category = category;
     this.ownerID = ownerID;
+    this.sold = sold;
   }
 
   static fromJson = (id, json) => {
-    return new Item(id, json.name, json.description, [], json.category, json.ownerID);
+    return new Item(id, json.name, json.description, [], json.category, json.ownerID, json.sold);
   }
 
   static emptyItem = () => {
-    return new Item("", "", "", [], "", "");
+    return new Item("", "", "", [], "", "", false);
   }
 
   add_image(filepath) {
@@ -26,14 +27,14 @@ export default class Item {
     this.images.splice(index, 1);
   }
 
-  to_json() {
-    return {Name: this.name, Description: this.description, Images: this.images}
+  toJson() {
+    return {name: this.name, description: this.description, category: this.category, ownerID: this.ownerID, sold: this.sold }
   }
 
   toListItem() {
     return {
+      id: this.id,
       name: this.name,
-      type: Filter.ITEMS
     }
   }
 }

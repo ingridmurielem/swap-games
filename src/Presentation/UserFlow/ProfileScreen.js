@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Container, Title} from '../CommonStyles/styles'
+import {Container, Title} from '../../CommonStyles/styles'
 
 function ProfileView() {
 

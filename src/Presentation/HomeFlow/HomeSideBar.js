@@ -12,12 +12,10 @@ export default function SideBarView(props) {
    return (
    
    <SideBarContainer> 
-    <img src={home_background} onClick={() => props.menuItemClicked(MenuItems.home)}/>
-    <img src={user_background} onClick={() => props.menuItemClicked(MenuItems.profile)}/>
-    <img src={chats_background} onClick={() => props.menuItemClicked(MenuItems.chats)}/>
-    <img src={deals_background} onClick={() => props.menuItemClicked(MenuItems.deals)}/>
-
+       <a href="/homeScreen"> <button> < img src={home_background} /> </button></a>
+       <a href="/signInScreen"> <button> < img src={user_background} /> </button></a>
+       <img src={chats_background} onClick={() => props.menuItemClicked(MenuItems.chats)}/>
+       <a href="/deals"> <button> < img src={deals_background} /> </button></a>
    </SideBarContainer> 
-   
    );   
 }

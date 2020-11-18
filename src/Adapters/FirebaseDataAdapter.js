@@ -9,18 +9,32 @@ import Transaction from '../Model/Transaction/Transaction.js';
 import transitions from '@material-ui/core/styles/transitions';
 import TransactionStatus from '../Model/Transaction/TransactionStatus'
 
+import { v4 as uuidv4 } from 'uuid';
+
 /// Fazer uma logicazinha do lado servidor utilizando Cloud functions disponibilizadas pelo firebase tbm
 
 class FirebaseDataAdapter {
     
 
-    getAllItems = () => {
-        return [ 
-            new Item(1, "Console", "Muito legal", [], Categories.CONSOLE), 
-            new Item(2, "Controle PS4", "Novinho", [], Categories.CONTROLE), 
-            new Item(3, "Play 4", "Usei muito pouco", [], Categories.CONSOLE)  
-        ];
+    getAllItems = async (callback) => {
+        
+        var finalItems = [];
+        var itemObjects = [];
+
+        await firebase.database().ref("items").once('value', snapshot => {
+            itemObjects = snapshot.val();
+        });
+
+        Object.keys(itemObjects).forEach(itemID => {
+            const newItem = Item.fromJson(itemID, itemObjects[itemID]);
+            finalItems.push(newItem);
+        });
+
+        console.log(finalItems);
+
+        callback(finalItems);
     }
+
     getAllUsers = () => {
         return [ 
             new RegistredUser(1, "Douglas", "email", "password", "city", "tags"), 
@@ -34,6 +48,21 @@ class FirebaseDataAdapter {
             new Chat("Jogos PS4")
         ]
     }
+
+    getCurrentUserItemsIDs = async(callback) => {
+
+        firebase.auth().onAuthStateChanged((user)=>{
+            firebase.database().ref("users").child(user.uid).child("items").once('value', function (snapshot) {
+                const ids = snapshot.val();
+                if(ids === undefined) {
+                    callback([]);
+                } else {
+                    callback(Object.keys(ids).map(key => key));
+                }
+            });
+        })
+    }
+
 
     getItemsByIds = async(itemsIDs, callback) => {
 
@@ -60,11 +89,14 @@ class FirebaseDataAdapter {
 
     getTransactionsIDsForCurrentUser = async(callback) => {
         
-        firebase.database()
+        firebase.auth().onAuthStateChanged((user)=>{
+            firebase.database()
             .ref("users")
-            .child("3K36t2dOIhY6p5uAJKK2RLlpjof1")
+            .child(user.uid)
             .child("transactions")
             .once('value', callback);
+    
+        })
     }
 
     getTransactionsByIds = async (transactionsIDs, callback) => {
@@ -76,6 +108,8 @@ class FirebaseDataAdapter {
 
         const promises = transactionsIDs.map(async (transactionID) => {
              await firebase.database().ref("transactions").child(transactionID).once('value', snapshot => {
+                 console.log("Transaction ");
+                 console.log(snapshot.val());
                 transactionsObjects[transactionID] = snapshot.val();
             });
         });
@@ -83,12 +117,14 @@ class FirebaseDataAdapter {
         await Promise.all(promises);
 
         Object.keys(transactionsObjects).forEach( transactionID => {
-            console.log(transitions[transactionID]);
+            console.log(transactionsObjects[transactionID]);
             const newTransaction = Transaction.fromJson(transactionID, transactionsObjects[transactionID]);
+            console.log(newTransaction)
             finalTransactions.push(newTransaction);
         });
 
         console.log(finalTransactions);
+        //console.log(finalTransactions);
 
         callback(finalTransactions);
     }
@@ -99,6 +135,28 @@ class FirebaseDataAdapter {
             .child(transactionID)
             .child("status")
             .set(transactionStatus);
+    }
+
+    startTransaction = async (transaction, onComplete) => {
+       
+        const uuid = uuidv4();
+       
+        await firebase.database()
+            .ref("transactions")
+            .child(uuid)
+            .set(transaction.toJson(), onComplete);
+
+            await firebase.database()
+            .ref("users")
+            .child(transaction.ownerID)
+            .child("transactions")
+            .child(uuid).set(uuid);
+
+            await firebase.database()
+            .ref("users")
+            .child(transaction.buyerID)
+            .child("transactions")
+            .child(uuid).set(uuid);
     }
 }
   

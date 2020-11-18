@@ -1,6 +1,6 @@
 import { colors } from '@material-ui/core';
 import React, {useEffect, useState} from 'react';
-import { Container, HorizontalStack, VerticalStack, DealsListItemText, AcceptDealButton, DeclineDealButton, TalkThroughWhatsappButton } from '../../../CommonStyles/styles';
+import { Container, HorizontalStack, VerticalStack, DealsListItemText, AcceptDealButton, DeclineDealButton, TalkThroughWhatsappButton, SubjectTitleDealsList } from '../../../CommonStyles/styles';
 import  FirDataAdapter from '../../../Adapters/FirebaseDataAdapter'
 import Item from '../../../Model/Item';
 import FirAuthAdapter from '../../../Adapters/FirebaseAuthAdapter';
@@ -26,16 +26,20 @@ function RenderButtonsForTransactionState(props) {
 }
 
 function DealsListItemView(props) {
+
+
+    const decideBuyer = () => {
+        if(FirAuthAdapter.matchCurrentUserID(props.transaction.buyerID)) { return "Eu mesmo" }  else { return props.transaction.buyerID }
+    }
+
     return (
     <Container> 
         <VerticalStack>
-            <DealsListItemText> De: {props.transaction.buyerID} </DealsListItemText>
+            <SubjectTitleDealsList> De: { decideBuyer()} </SubjectTitleDealsList>
             <DealsListItemText> Mensagem: {props.transaction.greetingsText} </DealsListItemText>
             <DealsListItemText> Status: {props.transactionStatus}</DealsListItemText>
-            <DealsListItemText> Item solicitado [ID]: {props.transaction.itemID} </DealsListItemText>
             <DealsListItemText> Item solicitado [Nome]: {props.item.name} </DealsListItemText>
-            <DealsListItemText> Oferta [IDs]: {props.transaction.tradeOff} </DealsListItemText>
-            <DealsListItemText> Oferta [Nomes]: {props.tradeOff.map(item => { return item.name })} </DealsListItemText>
+            <DealsListItemText> Oferta [Nome]: {props.tradeOff.map(item => { return item.name })} </DealsListItemText>
             <HorizontalStack>
                 <TalkThroughWhatsappButton >Conversar pelo whatsapp</TalkThroughWhatsappButton>
                 { RenderButtonsForTransactionState( { state: props.transactionStatus, imTheItemOwner: props.imTheItemOwner, changeTransactionStatus: props.changeTransactionStatus} ) }
@@ -79,8 +83,6 @@ export default function DealsListItem(props) {
         }, [])
 
 
-    return( <li>
-        { DealsListItemView( { transactionStatus: transactionStatus, item: requestedItem, tradeOff: tradeOff, transaction: props.transaction, imTheItemOwner: imTheItemOwner, changeTransactionStatus} ) }
-        </li> 
-        );
+    return DealsListItemView( { transactionStatus: transactionStatus, item: requestedItem, tradeOff: tradeOff, transaction: props.transaction, imTheItemOwner: imTheItemOwner, changeTransactionStatus} ); 
+    
 }

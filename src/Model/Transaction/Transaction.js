@@ -14,9 +14,8 @@ export default class Transaction {
       return new Transaction(id, json.status, json.itemID, json.tradeOff, json.buyerID, json.ownerID, json.greetingsText);
     }
   
-    to_json() {
+    toJson() {
       return { 
-        id: this.id, 
         itemID: this.itemID, 
         tradeOff: this.tradeOff,
         status: this.status,

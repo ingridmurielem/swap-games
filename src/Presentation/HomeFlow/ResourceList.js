@@ -6,5 +6,5 @@ export default function ResourceList(props) {
     if(props.dataSource === undefined) { return  <ul></ul> }
     console.log("filtered");
     console.log(props);
-    return props.dataSource.map(item => { return <ListItem item = {item}/> });
+    return props.dataSource.map(item => { return <ListItem item = {item} filter = {props.filter} startTransaction={props.startTransaction}/> });
   }
