@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Container, Input, Button, Title} from '../../../CommonStyles/styles'
 import FirebaseAuthAdapter from '../../../Adapters/FirebaseAuthAdapter'
+import { useHistory } from "react-router-dom";
 
 function RegisterView(signUpAction) {
 
@@ -10,7 +11,7 @@ function RegisterView(signUpAction) {
 
   return (
     <Container> 
-      <Title>Login</Title>
+      <Title>Cadastro</Title>
       <Input type="name" placeholder="Informe seu nome"
        value={userName} onChange={e=> setUserName(e.target.value)}
        />
@@ -26,20 +27,23 @@ function RegisterView(signUpAction) {
 }
 
 export default function RegisterController() {
-    const firAuthAdapter = new FirebaseAuthAdapter();
+
+   const history = useHistory();
+
 
     const signUpSuccess = (user) => {
       console.log(user);
+      history.push("/homeScreen");
       // update UI
     }
 
     const signUpError = (error) => {
       console.log(error);
-      // update UI
+      alert(error);
     }
 
     const signUpAction = (email, pass, userName) => {
-       firAuthAdapter.signUp(email, pass, userName, signUpSuccess).catch(error => signUpError(error));  
+      FirebaseAuthAdapter.signUp(email, pass, userName, signUpSuccess).catch(error => signUpError(error));  
     }
     
     return RegisterView(signUpAction);  

@@ -10,6 +10,7 @@ export default class RegistredUser {
         this.password = password;
         this.city = city;  
         this.tags = tags;
+        this.description = "";
         //this.items = new Array();
         //this.trades = new Array();
     }
@@ -57,8 +58,8 @@ export default class RegistredUser {
 
     toListItem() {
         return {
+          id: this.id,
           name: this.name,
-          type: Filter.USERS
         }
       }
 }

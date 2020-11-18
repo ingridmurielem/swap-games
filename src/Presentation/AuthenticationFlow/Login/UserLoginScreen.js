@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
-import {Container, Input, Button, Title} from '../CommonStyles/styles'
+import {Container, Input, Button, Title} from '../../../CommonStyles/styles'
 import FirebaseAuthAdapter from '../../../Adapters/FirebaseAuthAdapter'
+
+import { useHistory } from "react-router-dom";
 
 function LoginView(signInAction) {
 
@@ -23,11 +25,12 @@ function LoginView(signInAction) {
 }
 
 export default function LoginController() {
-    const firAuthAdapter = new FirebaseAuthAdapter();
+    
+   const history = useHistory();
 
     const signUpSuccess = (user) => {
       console.log(user);
-      // update UI
+      history.push("/homeScreen");
     }
 
     const signInError = (error) => {
@@ -35,6 +38,6 @@ export default function LoginController() {
       // update UI
     }
 
-    const signInAction = (email, pass) => firAuthAdapter.signIn(email, pass, signUpSuccess).catch(error => signInError(error));      
+    const signInAction = (email, pass) => FirebaseAuthAdapter.signIn(email, pass, signUpSuccess).catch(error => signInError(error));      
     return LoginView(signInAction);
 }
